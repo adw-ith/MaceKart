@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function App() {
-  const [currentForm, setCurrentForm] = useState<"login" | "signup" | "recover">("login");
+  const [currentForm, setCurrentForm] = useState<"login" | "signup" | "recover">("signup"); // Change to "signup"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -19,11 +19,11 @@ export default function App() {
     } else if (currentForm === "recover") {
       handlePasswordRecovery();
     }
-    setName("")
-    setEmail("")
-    setPassword("")
-    setConfirmPassword("")
-    setCurrentForm("login");
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setCurrentForm("signup"); // Reset to "signup" after submission if needed
   };
 
   const handleLogin = () => {
@@ -48,7 +48,7 @@ export default function App() {
   return (
     <div className="w-dvw h-dvh grid place-items-center bg-gradient-to-r from-cyan-500 to-black p-4">
       <div className="flex flex-row items-center justify-center gap-6 p-4 rounded-3xl shadow-lg shadow-cyan-400/50 relative w-full max-w-5xl max-h-3/4 md:h-3/5 overflow-hidden transition-transform duration-500 hover:scale-105">
-        <div className=" hidden md:flex items-center justify-center bg-cyan-100/10 p-4 rounded-lg shadow-inner shadow-black/70 w-1/2 h-full">
+        <div className="hidden md:flex items-center justify-center bg-cyan-100/10 p-4 rounded-lg shadow-inner shadow-black/70 w-1/2 h-full">
           <img src="/cartimage1.jpeg" alt="Shopping cart" className="w-full h-full object-cover rounded-md" />
         </div>
         <div className="flex flex-col items-center justify-center bg-white/10 p-2 md:p-8 rounded-lg shadow-md shadow-black/50 w-full md:w-1/2 h-full">

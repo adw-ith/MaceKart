@@ -28,9 +28,10 @@ export default function BuyerDashboardPage() {
   // ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className=" min-h-screen bg-cyan-500" ><div className="container bg-cyan-500 mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Buyer Dashboard</h1>
       {/* Rest of the component remains similar, with proper TypeScript typing */}
+    </div>
     </div>
   );
 }

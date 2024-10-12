@@ -37,9 +37,10 @@ export default function SellerDashboardPage() {
   // };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Seller Dashboard</h1>
+    <div className="min-h-screen bg-cyan-500 "><div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl text-white font-bold mb-6">Seller Dashboard</h1>
       {/* Rest of the component remains similar, with proper TypeScript typing */}
+    </div>
     </div>
   );
 }
