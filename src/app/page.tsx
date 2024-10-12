@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Welcome to CollegeMarket</h1>
+      <h1 className="text-4xl font-bold text-center mb-8">Welcome to MaceKart</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Link href="pages/buyer/dashboard" 
           className="p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition">
