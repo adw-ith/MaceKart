@@ -8,7 +8,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const router = useRouter();
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string,
+    // password: string
+    ) => {
     // Simulate API call
     const mockUser: AuthUser = {
       id: '1',
