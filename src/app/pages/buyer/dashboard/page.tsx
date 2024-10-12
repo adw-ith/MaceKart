@@ -64,7 +64,7 @@ export default function BuyerDashboardPage() {
                 alt={product.name}
                 className="w-full h-40 object-cover rounded-md mb-2"
               />
-              <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+              <h2 className="text-xl text-black font-semibold mb-2">{product.name}</h2>
               <p className="text-gray-700 mb-2">{product.description}</p>
               <p className="text-lg font-bold text-cyan-600">₹{product.price}</p>
               <p className="text-gray-500">Stock: {product.stock}</p>
