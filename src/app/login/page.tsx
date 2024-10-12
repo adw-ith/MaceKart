@@ -45,9 +45,9 @@ export default function App() {
   };
 
   return (
-    <div style={styles.outerContainer}>
-      <div style={styles.container}>
-        <div style={styles.imageWrapper}>
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-cyan-500 to-black">
+      <div className="flex items-center justify-center p-8 rounded-3xl shadow-[0_0_30px_rgba(0,255,255,0.5),_0_0_60px_rgba(0,0,0,0.8)] w-[700px] max-w-full">
+        <div className="mr-12 bg-cyan-500 bg-opacity-10 p-4 rounded-xl shadow-inner">
           <Image 
             src="/cartimage1.jpeg" 
             alt="Shopping cart" 
@@ -55,13 +55,13 @@ export default function App() {
             height={300} 
           />
         </div>
-        <div style={styles.formWrapper}>
+        <div className="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]">
           {currentForm === 'login' && (
             <>
-              <h2 style={styles.heading}>Login</h2>
-              <form style={styles.form} onSubmit={handleLoginSubmit}>
+              <h2 className="text-cyan-400 text-center mb-4">Login</h2>
+              <form className="flex flex-col" onSubmit={handleLoginSubmit}>
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="email" 
                   name="email" 
                   placeholder="Email" 
@@ -70,7 +70,7 @@ export default function App() {
                   required 
                 />
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="password" 
                   name="password" 
                   placeholder="Password" 
@@ -78,17 +78,17 @@ export default function App() {
                   onChange={handleInputChange}
                   required 
                 />
-                <button type="submit" style={styles.button}>
+                <button type="submit" className="bg-cyan-400 text-black p-2 text-sm rounded-md transition-colors duration-300 ease-in-out hover:bg-cyan-300">
                   Login
                 </button>
               </form>
-              <div style={styles.switchText}>
-                <p style={styles.switchTextContainer}>
-                  <span style={styles.link} onClick={() => toggleForm('signup')}>
+              <div className="text-white text-center mt-4">
+                <p className="flex justify-between items-center mt-4">
+                  <span className="text-cyan-400 cursor-pointer underline mr-5" onClick={() => toggleForm('signup')}>
                     Sign up
                   </span>
                   <Link href="#" onClick={() => toggleForm('recover')}>
-                    <span style={styles.forgotPasswordLink}>
+                    <span className="text-cyan-400 cursor-pointer underline">
                       Forgot Password?
                     </span>
                   </Link>
@@ -98,10 +98,10 @@ export default function App() {
           )}
           {currentForm === 'signup' && (
             <>
-              <h2 style={styles.heading}>Sign Up</h2>
-              <form style={styles.form} onSubmit={handleSignupSubmit}>
+              <h2 className="text-cyan-400 text-center mb-4">Sign Up</h2>
+              <form className="flex flex-col" onSubmit={handleSignupSubmit}>
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="text" 
                   name="name" 
                   placeholder="Name" 
@@ -110,7 +110,7 @@ export default function App() {
                   required 
                 />
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="email" 
                   name="email" 
                   placeholder="Email" 
@@ -119,7 +119,7 @@ export default function App() {
                   required 
                 />
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="password" 
                   name="password" 
                   placeholder="Password" 
@@ -127,26 +127,24 @@ export default function App() {
                   onChange={handleInputChange}
                   required 
                 />
-                <button type="submit" style={styles.button}>
+                <button type="submit" className="bg-cyan-400 text-black p-2 text-sm rounded-md transition-colors duration-300 ease-in-out hover:bg-cyan-300">
                   Sign Up
                 </button>
               </form>
-              <div style={styles.switchText}>
-                <p style={styles.switchTextContainer}>
-                  <span style={styles.link} onClick={() => toggleForm('login')}>
-                    Login
-                  </span>
+              <div className="text-white text-center mt-4">
+                <p className="text-cyan-400 cursor-pointer underline" onClick={() => toggleForm('login')}>
+                  Login
                 </p>
               </div>
             </>
           )}
           {currentForm === 'recover' && (
             <>
-              <h2 style={styles.heading}>Recover Your Password</h2>
-              {message && <p style={styles.message}>{message}</p>}
-              <form style={styles.form} onSubmit={handleRecoverSubmit}>
+              <h2 className="text-cyan-400 text-center mb-4">Recover Your Password</h2>
+              {message && <p className="text-green-400 mb-4">{message}</p>}
+              <form className="flex flex-col" onSubmit={handleRecoverSubmit}>
                 <input 
-                  style={styles.input} 
+                  className="p-2 mb-4 border-none rounded-md shadow-inner" 
                   type="email" 
                   name="email" 
                   placeholder="Enter your email" 
@@ -154,15 +152,13 @@ export default function App() {
                   onChange={handleInputChange}
                   required 
                 />
-                <button type="submit" style={styles.button}>
+                <button type="submit" className="bg-cyan-400 text-black p-2 text-sm rounded-md transition-colors duration-300 ease-in-out hover:bg-cyan-300">
                   Send Recovery Email
                 </button>
               </form>
-              <div style={styles.switchText}>
-                <p style={styles.switchTextContainer}>
-                  <span style={styles.link} onClick={() => toggleForm('login')}>
-                    Login
-                  </span>
+              <div className="text-white text-center mt-4">
+                <p className="text-cyan-400 cursor-pointer underline" onClick={() => toggleForm('login')}>
+                  Login
                 </p>
               </div>
             </>
@@ -172,92 +168,3 @@ export default function App() {
     </div>
   );
 }
-
-const styles = {
-  outerContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    background: 'linear-gradient(to right, cyan, black)',
-  },
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '30px',
-    borderRadius: '25px',
-    boxShadow: '0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 0, 0, 0.8)',
-    position: 'relative',
-    width: '700px',
-    maxWidth: '100%',
-    overflow: 'hidden',
-  },
-  imageWrapper: {
-    marginRight: '50px',
-    background: 'rgba(0, 255, 255, 0.1)',
-    padding: '10px',
-    borderRadius: '15px',
-    boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.7)',
-  },
-  formWrapper: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(10px)',
-    padding: '30px',
-    borderRadius: '15px',
-    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.5)',
-  },
-  heading: {
-    color: '#00ffcc',
-    textAlign: 'center',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    padding: '10px',
-    marginBottom: '15px',
-    border: 'none',
-    borderRadius: '5px',
-    boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.5)',
-    color: 'black', // Set text color to black
-  },
-  button: {
-    backgroundColor: '#00ffcc',
-    color: 'black',
-    padding: '6px',
-    fontSize: '14px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  },
-  message: {
-    color: '#00ff00',
-    marginBottom: '15px',
-  },
-  switchText: {
-    textAlign: 'center',
-    marginTop: '10px',
-    color: '#fff',
-  },
-  switchTextContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: '10px',
-    color: '#fff',
-  },
-  link: {
-    color: '#00ffcc',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-    marginRight: '20px',
-  },
-  forgotPasswordLink: {
-    color: '#00ffcc',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-  },
-};
