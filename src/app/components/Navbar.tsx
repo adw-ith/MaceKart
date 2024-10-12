@@ -10,6 +10,10 @@ const Navbar: React.FC = () => {
     setIsProductsDropdownOpen(!isProductsDropdownOpen);
   };
 
+  const handleProductSelect = () => {
+    setIsProductsDropdownOpen(false); // Close the dropdown after selecting a product
+  };
+
   return (
     <nav className="fixed top-0 w-full bg-black text-white shadow-lg z-50">
       <div className="container mx-auto px-4">
@@ -32,18 +36,17 @@ const Navbar: React.FC = () => {
                   onMouseEnter={() => setIsProductsDropdownOpen(true)}
                   onMouseLeave={() => setIsProductsDropdownOpen(false)}
                 >
-                  <Link href="/products/stationary" className="block px-4 py-2 hover:bg-gray-100">Stationary</Link>
-                  <Link href="/products/sanitory" className="block px-4 py-2 hover:bg-gray-100">Sanitory</Link>
-                  <Link href="/products/sweets" className="block px-4 py-2 hover:bg-gray-100">Sweets</Link>
-                  <Link href="/products/cloths" className="block px-4 py-2 hover:bg-gray-100">Cloths</Link>
-                  <Link href="/products/study-materials" className="block px-4 py-2 hover:bg-gray-100">Study Materials</Link>
-                  <Link href="/products/handicrafts" className="block px-4 py-2 hover:bg-gray-100">Handicrafts</Link>
+                  <Link href="/products/stationary" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Stationary</Link>
+                  <Link href="/products/sanitory" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Sanitory</Link>
+                  <Link href="/products/sweets" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Sweets</Link>
+                  <Link href="/products/cloths" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Cloths</Link>
+                  <Link href="/products/study-materials" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Study Materials</Link>
+                  <Link href="/products/handicrafts" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Handicrafts</Link>
                 </div>
               )}
             </div>
             {/* Other links */}
-            <Link href="/login" className="hover:text-gray-200">Login</Link>
-            <Link href="/signup" className="hover:text-gray-200">Sign Up</Link>
+            <Link href="/login" className="hover:text-gray-200">Login/Sign Up</Link>
           </div>
         </div>
       </div>
