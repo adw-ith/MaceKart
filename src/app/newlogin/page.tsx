@@ -51,7 +51,7 @@ export default function App() {
         <div className=" hidden md:flex items-center justify-center bg-cyan-100/10 p-4 rounded-lg shadow-inner shadow-black/70 w-1/2 h-full">
           <img src="/cartimage1.jpeg" alt="Shopping cart" className="w-full h-full object-cover rounded-md" />
         </div>
-        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md p-2 md:p-8 rounded-lg shadow-md shadow-black/50 w-full md:w-1/2 h-full">
+        <div className="flex flex-col items-center justify-center bg-white/10 p-2 md:p-8 rounded-lg shadow-md shadow-black/50 w-full md:w-1/2 h-full">
           <h2 className="h-1/6 flex items-center justify-center text-center mb-0 md:mb-8 text-cyan-400 text-2xl font-semibold tracking-wide">
             {currentForm === "login" ? "Login" : currentForm === "signup" ? "Sign Up" : "Recover Your Password"}
           </h2>
