@@ -118,7 +118,7 @@ export default function App() {
                       </span>
                     </p>
                     <p className="text-sm text-center">
-                      Don't have an account? <br />
+                      Don&apos;t have an account? <br />
                       <span
                         className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
                         onClick={() => setCurrentForm("signup")}
