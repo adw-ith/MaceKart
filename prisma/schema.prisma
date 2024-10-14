@@ -12,27 +12,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model Customer {
-  cid         Int       @id @default(autoincrement())
-  name        String
-  email       String    @unique
-  phone       Int
-  address     String
-  purchases   Purchase[]
-  reviews     Review[]
-  login       Login?    @relation(fields: [email], references: [username])
+  cid       Int        @id @default(autoincrement())
+  name      String?
+  email     String     @unique
+  phone     Int?
+  address   String?
+  purchases Purchase[]
+  reviews   Review[]
+  login     Login?     @relation(fields: [email], references: [username])
 }
 
 model Product {
-  prod_id     Int       @id @default(autoincrement())
+  prod_id     Int        @id @default(autoincrement())
   name        String
   description String?
   price       Float
   quantity    Int
   sid         Int?
-  supplier    Supplier? @relation(fields: [sid], references: [sid])
+  supplier    Supplier?  @relation(fields: [sid], references: [sid])
   categoryId  Int?
-  category    Category? @relation(fields: [categoryId], references: [cat_id])
+  category    Category?  @relation(fields: [categoryId], references: [cat_id])
   purchases   Purchase[]
   reviews     Review[]
 }
@@ -44,47 +45,47 @@ model Category {
 }
 
 model Supplier {
-  sid         Int       @id @default(autoincrement())
-  name        String
-  email       String    @unique
-  phone       Int
-  address     String
-  products    Product[]
-  login       Login?    @relation(fields: [email], references: [username])
+  sid      Int       @id @default(autoincrement())
+  name     String?
+  email    String    @unique
+  phone    Int?
+  address  String?
+  products Product[]
+  login    Login?    @relation(fields: [email], references: [username])
 }
 
 model Purchase {
-  pid         Int       @id @default(autoincrement())
-  cid         Int
-  prod_id     Int
-  date        DateTime  @default(now())
-  quantity    Int
-  totalPrice  Float
-  approved    Boolean   @default(false)
-  customer    Customer  @relation(fields: [cid], references: [cid])
-  product     Product   @relation(fields: [prod_id], references: [prod_id])
+  pid        Int      @id @default(autoincrement())
+  cid        Int
+  prod_id    Int
+  date       DateTime @default(now())
+  quantity   Int
+  totalPrice Float
+  approved   Boolean  @default(false)
+  customer   Customer @relation(fields: [cid], references: [cid])
+  product    Product  @relation(fields: [prod_id], references: [prod_id])
 }
 
 model Review {
-  rid         Int       @id @default(autoincrement())
-  prod_id     Int
-  cid         Int
-  rating      Int
-  comment     String?
-  date        DateTime  @default(now())
-  product     Product   @relation(fields: [prod_id], references: [prod_id])
-  customer    Customer  @relation(fields: [cid], references: [cid])
+  rid      Int      @id @default(autoincrement())
+  prod_id  Int
+  cid      Int
+  rating   Int
+  comment  String?
+  date     DateTime @default(now())
+  product  Product  @relation(fields: [prod_id], references: [prod_id])
+  customer Customer @relation(fields: [cid], references: [cid])
 }
 
 model Login {
-  username   String   @unique @id
-  password   String
-  role       String
-  sessionId  String?  // To store the session ID
-  sessionExpiry DateTime?  // To store session expiration
-  createdAt  DateTime @default(now()) // To track when the session was created
+  username      String    @id @unique
+  password      String
+  role          String?   @default("user")
+  sessionId     String? // To store the session ID
+  sessionExpiry DateTime? // To store session expiration
+  createdAt     DateTime  @default(now()) // To track when the session was created
 
   // Back relations
-  customer   Customer?
-  supplier   Supplier?
+  customer Customer?
+  supplier Supplier?
 }
