@@ -21,12 +21,12 @@ export class ReviewRepository {
         message: "Review added successfully",
         data: newReview,
       };
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error adding review:", error);
       return {
         status: 500,
         message: "Error adding review",
-        error: error.message,
+        error: error,
       };
     }
   }
@@ -55,12 +55,12 @@ export class ReviewRepository {
         message: "Review updated successfully",
         data: updatedReview,
       };
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error updating review:", error);
       return {
         status: 500,
         message: "Error updating review",
-        error: error.message,
+        error: error,
       };
     }
   }
@@ -85,12 +85,12 @@ export class ReviewRepository {
         message: "Review deleted successfully",
         data: deletedReview,
       };
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error deleting review:", error);
       return {
         status: 500,
         message: "Error deleting review",
-        error: error.message,
+        error: error,
       };
     }
   }

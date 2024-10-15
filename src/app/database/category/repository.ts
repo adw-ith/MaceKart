@@ -13,8 +13,12 @@ export class CategoryRepository {
         message: "Category added successfully",
         data: newCategory,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",
@@ -47,8 +51,12 @@ export class CategoryRepository {
         status: 200,
         message: "Category deleted successfully",
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",
@@ -75,8 +83,11 @@ export class CategoryRepository {
       }
 
       // Build the update data dynamically
-      const updateData: any = {};
-      if (description !== null) updateData.description = description;
+      const updateData: { description?: string } = {};
+
+      if (description !== null) {
+        updateData.description = description;
+      }
 
       if (Object.keys(updateData).length === 0) {
         return {
@@ -97,8 +108,12 @@ export class CategoryRepository {
         message: "Category updated successfully",
         data: updatedCategory,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",

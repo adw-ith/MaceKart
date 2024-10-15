@@ -1,6 +1,6 @@
 import { ProductRepository } from "@/app/database/product/repository";
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   try {
     const { name, price, quantity, description, sid, categoryId } =
       await req.json();
@@ -18,7 +18,11 @@ export async function POST(req: Request, res: Response) {
         data: product,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }

@@ -18,7 +18,13 @@ export class UserRepository {
         };
       const isMatch = await argon2.verify(user.password, password);
       if (isMatch) {
-        const { password, ...rest } = user;
+        const rest = {
+          username: user.username,
+          role: user.role,
+          sessionId: user.sessionId,
+          sessionExpiry: user.sessionExpiry,
+          createdAt: user.createdAt,
+        };
         return {
           status: 200,
           message: "Login successful",
@@ -29,8 +35,12 @@ export class UserRepository {
           status: 401,
           message: "Invalid credentials",
         };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
     }
   }
 
@@ -50,7 +60,13 @@ export class UserRepository {
       if (role === "user") created = await userRepo.createCustomer(email);
       else if (role === "supplier")
         created = await userRepo.createSupplier(email);
-      const { password, ...rest } = user;
+      const rest = {
+        username: user.username,
+        role: user.role,
+        sessionId: user.sessionId,
+        sessionExpiry: user.sessionExpiry,
+        createdAt: user.createdAt,
+      };
       const result = { user: rest, created: created };
       return result;
     } catch (error) {
@@ -77,8 +93,8 @@ export class UserRepository {
         },
       });
       return customer;
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -90,8 +106,8 @@ export class UserRepository {
         },
       });
       return supplier;
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      console.log(error);
     }
   }
 }

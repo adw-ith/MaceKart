@@ -1,6 +1,6 @@
 import { CategoryRepository } from "@/app/database/category/repository";
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   try {
     const { description } = await req.json();
     const category = await CategoryRepository.addCategory(description);
@@ -10,7 +10,11 @@ export async function POST(req: Request, res: Response) {
         data: category,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { UserRepository } from "@/app/database/user/repository";
 
-export async function POST(req: any, res: any) {
+export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
     const data = await UserRepository.loginUser(email, password);
@@ -10,7 +10,11 @@ export async function POST(req: any, res: any) {
         data,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }

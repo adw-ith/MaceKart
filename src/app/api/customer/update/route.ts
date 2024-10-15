@@ -1,6 +1,6 @@
 import { CustomerRepository } from "@/app/database/customer/repository";
 
-export async function PUT(req: Request, res: Response) {
+export async function PUT(req: Request) {
   try {
     const { name, email, phone, address } = await req.json();
     const user = await CustomerRepository.updateCustomer(
@@ -15,7 +15,11 @@ export async function PUT(req: Request, res: Response) {
         data: user,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }

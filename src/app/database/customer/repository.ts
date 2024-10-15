@@ -35,8 +35,12 @@ export class CustomerRepository {
         message: "Customer updated successfully",
         data: updatedCustomer,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
     }
   }
 
@@ -63,7 +67,8 @@ export class CustomerRepository {
       }
 
       // Dynamically build the data object for updating
-      const updateData: any = {}; // Create an empty object to hold the fields to update
+      const updateData: { name?: string; phone?: number; address?: string } =
+        {}; // Create an empty object to hold the fields to update
 
       if (name !== null) updateData.name = name;
       if (phone !== null) updateData.phone = phone;
@@ -90,8 +95,12 @@ export class CustomerRepository {
         message: "Customer updated successfully",
         data: updatedCustomer,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",

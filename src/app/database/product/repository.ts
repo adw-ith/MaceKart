@@ -25,8 +25,12 @@ export class ProductRepository {
         message: "Product added successfully",
         data: newProduct,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",
@@ -59,8 +63,12 @@ export class ProductRepository {
         status: 200,
         message: "Product deleted successfully",
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",
@@ -90,7 +98,12 @@ export class ProductRepository {
       }
 
       // Build the update data dynamically
-      const updateData: any = {};
+      const updateData: {
+        name?: string;
+        price?: number;
+        quantity?: number;
+        description?: string;
+      } = {};
       if (name !== null) updateData.name = name;
       if (price !== null) updateData.price = price;
       if (quantity !== null) updateData.quantity = quantity;
@@ -115,8 +128,12 @@ export class ProductRepository {
         message: "Product updated successfully",
         data: updatedProduct,
       };
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
       return {
         status: 500,
         message: "Internal Server Error",

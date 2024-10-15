@@ -3,7 +3,9 @@
 import { useState } from "react";
 
 export default function App() {
-  const [currentForm, setCurrentForm] = useState<"login" | "signup" | "recover">("signup"); // Change to "signup"
+  const [currentForm, setCurrentForm] = useState<
+    "login" | "signup" | "recover"
+  >("signup"); // Change to "signup"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -49,11 +51,19 @@ export default function App() {
     <div className="w-dvw h-dvh grid place-items-center bg-gradient-to-r from-cyan-500 to-black p-4">
       <div className="flex flex-row items-center justify-center gap-6 p-4 rounded-3xl shadow-lg shadow-cyan-400/50 relative w-full max-w-5xl max-h-3/4 md:h-3/5 overflow-hidden transition-transform duration-500 hover:scale-105">
         <div className="hidden md:flex items-center justify-center bg-cyan-100/10 p-4 rounded-lg shadow-inner shadow-black/70 w-1/2 h-full">
-          <img src="/cartimage1.jpeg" alt="Shopping cart" className="w-full h-full object-cover rounded-md" />
+          <img
+            src="/cartimage1.jpeg"
+            alt="Shopping cart"
+            className="w-full h-full object-cover rounded-md"
+          />
         </div>
         <div className="flex flex-col items-center justify-center bg-white/10 p-2 md:p-8 rounded-lg shadow-md shadow-black/50 w-full md:w-1/2 h-full">
           <h2 className="h-1/6 flex items-center justify-center text-center mb-0 md:mb-8 text-cyan-400 text-2xl font-semibold tracking-wide">
-            {currentForm === "login" ? "Login" : currentForm === "signup" ? "Sign Up" : "Recover Your Password"}
+            {currentForm === "login"
+              ? "Login"
+              : currentForm === "signup"
+              ? "Sign Up"
+              : "Recover Your Password"}
           </h2>
           <div className="h-5/6 flex items-center justify-center w-full">
             <form className="flex flex-col w-full px-4" onSubmit={handleSubmit}>
@@ -103,7 +113,11 @@ export default function App() {
                 type="submit"
                 className="bg-cyan-400 text-black py-2 text-sm rounded-md cursor-pointer transition-all duration-300 ease-in-out hover:bg-cyan-500 hover:text-white"
               >
-                {currentForm === "login" ? "Login" : currentForm === "signup" ? "Sign Up" : "Send Recovery Email"}
+                {currentForm === "login"
+                  ? "Login"
+                  : currentForm === "signup"
+                  ? "Sign Up"
+                  : "Send Recovery Email"}
               </button>
               <div className="mt-4 text-white">
                 {currentForm === "login" && (
@@ -118,7 +132,7 @@ export default function App() {
                       </span>
                     </p>
                     <p className="text-sm text-center">
-                      Don't have an account? <br />
+                      Don{"'"}t have an account? <br />
                       <span
                         className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
                         onClick={() => setCurrentForm("signup")}

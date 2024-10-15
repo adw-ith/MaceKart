@@ -1,6 +1,6 @@
 import { ProductRepository } from "@/app/database/product/repository";
 
-export async function PUT(req: Request, res: Response) {
+export async function PUT(req: Request) {
   try {
     const { id, name, price, quantity, description } = await req.json();
     const product = await ProductRepository.updateProduct(
@@ -16,7 +16,11 @@ export async function PUT(req: Request, res: Response) {
         data: product,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }

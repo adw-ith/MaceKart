@@ -1,6 +1,6 @@
 import { ProductRepository } from "@/app/database/product/repository";
 
-export async function DELETE(req: Request, res: Response) {
+export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
     const deletedProduct = await ProductRepository.deleteProduct(id);
@@ -10,7 +10,11 @@ export async function DELETE(req: Request, res: Response) {
         data: deletedProduct,
       })
     );
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
   }
 }
