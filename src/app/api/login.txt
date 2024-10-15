@@ -1,6 +1,6 @@
-login
-supplier sign up
-customer sign up
+> login
+> supplier sign up
+> customer sign up
 supplier product add
 supplier product remove
 supplier product edit

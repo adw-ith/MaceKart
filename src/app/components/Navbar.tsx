@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
 
   const toggleProductsDropdown = () => {
-    setIsProductsDropdownOpen(!isProductsDropdownOpen);
+    setIsProductsDropdownOpen((prev) => !prev);
   };
 
   const handleProductSelect = () => {
@@ -25,16 +25,14 @@ const Navbar: React.FC = () => {
               <button 
                 className="hover:text-gray-200 focus:outline-none" 
                 onClick={toggleProductsDropdown}
-                onMouseEnter={() => setIsProductsDropdownOpen(true)}
-                onMouseLeave={() => setIsProductsDropdownOpen(false)}
+                onBlur={() => setIsProductsDropdownOpen(false)} // Close on blur
               >
                 Products
               </button>
               {isProductsDropdownOpen && (
                 <div 
                   className="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg"
-                  onMouseEnter={() => setIsProductsDropdownOpen(true)}
-                  onMouseLeave={() => setIsProductsDropdownOpen(false)}
+                  onMouseLeave={() => setIsProductsDropdownOpen(false)} // Close on mouse leave
                 >
                   <Link href="/products/stationary" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Stationary</Link>
                   <Link href="/products/sanitory" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Sanitory</Link>
