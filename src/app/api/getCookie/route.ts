@@ -5,7 +5,8 @@ import crypto from 'crypto';
 //     return JSON.parse(Buffer.from(encodedData, 'base64').toString());
 // }
 const ENCRYPTION_KEY = (process.env.ENCRYPTION_KEY || 'your-key-here').padEnd(32, '0').slice(0, 32);
-function decrypt(encryptedText:any) {
+
+function decrypt(encryptedText:string) {
     const [iv, encrypted] = encryptedText.split(':'); // Split the IV and the encrypted text
     const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), Buffer.from(iv, 'hex'));
     

@@ -1,11 +1,11 @@
 'use server';
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
-
 const ENCRYPTION_KEY = (process.env.ENCRYPTION_KEY || 'your-key-here').padEnd(32, '0').slice(0, 32);
 const IV_LENGTH = 16;
 
-function encrypt(text:any) {
+
+function encrypt(text: string): string {
     const iv = crypto.randomBytes(IV_LENGTH);
     const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
     let encrypted = cipher.update(text, 'utf8', 'hex');
