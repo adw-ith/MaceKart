@@ -1,8 +1,8 @@
 > login
 > supplier sign up
 > customer sign up
-supplier product add
-supplier product remove
-supplier product edit
+> supplier product add
+> supplier product remove
+> supplier product edit
 buyer purchase
 customer review

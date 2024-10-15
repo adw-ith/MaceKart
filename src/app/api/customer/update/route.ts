@@ -1,9 +1,9 @@
 import { CustomerRepository } from "@/app/database/customer/repository";
 
-export async function POST(req: Request, res: Response) {
+export async function PUT(req: Request, res: Response) {
   try {
     const { name, email, phone, address } = await req.json();
-    const data = await CustomerRepository.createCustomer(
+    const user = await CustomerRepository.updateCustomer(
       name,
       email,
       phone,
@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
     return new Response(
       JSON.stringify({
         success: true,
-        data,
+        data: user,
       })
     );
   } catch (error: any) {

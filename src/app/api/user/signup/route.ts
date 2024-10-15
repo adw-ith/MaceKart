@@ -1,4 +1,4 @@
-import { UserRepository } from "@/app/database/schema/user/repository";
+import { UserRepository } from "@/app/database/user/repository";
 
 export async function POST(req: any, res: any) {
   try {

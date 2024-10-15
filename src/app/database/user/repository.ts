@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import prisma from "../../../../../lib/prisma_config";
+import prisma from "../../../../lib/prisma_config";
 import * as argon2 from "argon2";
 
 export class UserRepository {
