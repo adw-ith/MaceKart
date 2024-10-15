@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "Customer" ALTER COLUMN "name" DROP NOT NULL,
+ALTER COLUMN "phone" DROP NOT NULL,
+ALTER COLUMN "address" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Login" ALTER COLUMN "role" DROP NOT NULL,
+ALTER COLUMN "role" SET DEFAULT 'user';
