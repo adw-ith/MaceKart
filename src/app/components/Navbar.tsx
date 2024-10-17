@@ -15,15 +15,15 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-black text-white shadow-lg z-50">
+    <nav className="fixed top-0 w-full bg-slate-800 text-white shadow-lg z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between  items-center h-16">
           <Link href="/" className="text-xl font-bold">MaceKart</Link>
           <div className="flex space-x-4">
             {/* Products dropdown */}
-            <div className="relative">
+            <div className="relative flex">
               <button 
-                className="hover:text-gray-200 focus:outline-none" 
+                className="hover:text-amber-100 focus:outline-none" 
                 onClick={toggleProductsDropdown}
                 onBlur={() => setIsProductsDropdownOpen(false)} // Close on blur
               >
@@ -44,7 +44,8 @@ const Navbar: React.FC = () => {
               )}
             </div>
             {/* Other links */}
-            <Link href="/login" className="hover:text-gray-200">Login/Sign Up</Link>
+            <Link href="/login" className=""><button className='border border-slate-100 px-4 py-1 hover:text-amber-950 hover:bg-slate-100 duration-300'>
+              Login</button></Link>
           </div>
         </div>
       </div>
