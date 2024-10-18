@@ -14,7 +14,12 @@ const config: Config = {
       },
     },
     screens: {
-      "2md": "991px"
+      "md":"767px",
+      "2md": "991px",
+      "sm":"640px",
+      "xl":"1280px",
+      
+       
     }
   },
   plugins: [],

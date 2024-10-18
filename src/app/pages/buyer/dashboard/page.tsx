@@ -117,10 +117,10 @@ const products:Product[] = [
 
 export default function BuyerDashboardPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto  px-4  md:px-24 py-8 bg-slate-50">
+    <div className="min-h-screen bg-slate-400">
+      <div className="mx-auto  px-10  md:px-16  py-8 bg-slate-400">
         <h1 className="text-2xl font-bold mb-6 text-slate-900 text-center">Buyer Dashboard</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2md:grid-cols-4 xl:grid-cols-5 gap-6">
           {products.map((product) => (
           <ProductCard key={product.prod_id} product={product}/>
           ))}
