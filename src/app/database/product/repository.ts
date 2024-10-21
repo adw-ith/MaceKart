@@ -140,4 +140,60 @@ export class ProductRepository {
       };
     }
   }
+
+  static async getProducts() {
+    try {
+      const products = await prisma.product.findMany({
+        include: {
+          supplier: true, // Include supplier details if needed
+          category: true, // Include category details if needed
+          reviews: false, // Include reviews if needed
+          purchases: false, // Include purchases if needed
+        },
+      });
+      return products;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
+      return {
+        status: 500,
+        message: "Internal Server Error",
+      };
+    }
+  }
+
+  static async getProductById(prod_id: number) {
+    try {
+      const product = await prisma.product.findUnique({
+        where: {
+          prod_id: prod_id,
+        },
+        include: {
+          supplier: true, // Include supplier if needed
+          category: true, // Include category if needed
+          reviews: true, // Include reviews if needed
+          purchases: false, // Include purchases if needed
+        },
+      });
+
+      if (!product) {
+        throw new Error(`Product with id ${prod_id} not found`);
+      }
+
+      return product;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
+      return {
+        status: 500,
+        message: "Internal Server Error",
+      };
+    }
+  }
 }
