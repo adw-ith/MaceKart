@@ -1,6 +1,7 @@
-"use client"; // This tells Next.js that this is a Client Component
+"use client";
 
 import { useState } from "react";
+import axios from "axios";
 
 export default function App() {
   const [currentForm, setCurrentForm] = useState<
@@ -28,18 +29,49 @@ export default function App() {
     setCurrentForm("signup"); // Reset to "signup" after submission if needed
   };
 
-  const handleLogin = () => {
-    // Here you can handle the login logic, such as making an API call
-    console.log("Logging in with", { email, password });
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "/api/user/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log("Login successful:", response.data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    // Basic validation to ensure passwords match
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    // Handle the signup logic, such as making an API call
-    console.log("Signing up with", { name, email, password });
+
+    try {
+      const response = await axios.post(
+        "/api/user/signup",
+        {
+          role: "user",
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log("Signup successful:", response.data);
+    } catch (error) {
+      console.error("Signup failed:", error);
+    }
   };
 
   const handlePasswordRecovery = () => {
@@ -48,8 +80,8 @@ export default function App() {
   };
 
   return (
-    <div className="w-dvw h-dvh grid place-items-center bg-gradient-to-r from-cyan-500 to-black p-4">
-      <div className="flex flex-row items-center justify-center gap-6 p-4 rounded-3xl shadow-lg shadow-cyan-400/50 relative w-full max-w-5xl max-h-3/4 md:h-3/5 overflow-hidden transition-transform duration-500 hover:scale-105">
+    <div className="w-dvw h-dvh grid place-items-center p-4">
+      <div className="flex flex-row items-center justify-center gap-6 p-4 rounded-3xl shadow-lg shadow-slate-400/50 relative w-full max-w-5xl max-h-3/4 md:h-3/5 overflow-hidden transition-transform duration-500 hover:scale-105">
         <div className="hidden md:flex items-center justify-center bg-cyan-100/10 p-4 rounded-lg shadow-inner shadow-black/70 w-1/2 h-full">
           <img
             src="/cartimage1.jpeg"
@@ -58,7 +90,7 @@ export default function App() {
           />
         </div>
         <div className="flex flex-col items-center justify-center bg-white/10 p-2 md:p-8 rounded-lg shadow-md shadow-black/50 w-full md:w-1/2 h-full">
-          <h2 className="h-1/6 flex items-center justify-center text-center mb-0 md:mb-8 text-cyan-400 text-2xl font-semibold tracking-wide">
+          <h2 className="h-1/6 flex items-center justify-center text-center mb-0 md:mb-8 text-blue-500 text-2xl font-semibold tracking-wide pb-4">
             {currentForm === "login"
               ? "Login"
               : currentForm === "signup"
@@ -69,7 +101,7 @@ export default function App() {
             <form className="flex flex-col w-full px-4" onSubmit={handleSubmit}>
               {currentForm === "signup" && (
                 <input
-                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all"
+                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   type="text"
                   name="name"
                   placeholder="Name"
@@ -79,7 +111,7 @@ export default function App() {
                 />
               )}
               <input
-                className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all"
+                className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -89,7 +121,7 @@ export default function App() {
               />
               {currentForm !== "recover" && (
                 <input
-                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all"
+                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -100,7 +132,7 @@ export default function App() {
               )}
               {currentForm === "signup" && (
                 <input
-                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all"
+                  className="p-3 mb-4 border-none rounded-md shadow-inner shadow-black/50 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   type="password"
                   name="confirmPassword"
                   placeholder="Re-type Password"
@@ -111,7 +143,7 @@ export default function App() {
               )}
               <button
                 type="submit"
-                className="bg-cyan-400 text-black py-2 text-sm rounded-md cursor-pointer transition-all duration-300 ease-in-out hover:bg-cyan-500 hover:text-white"
+                className="bg-blue-500  py-2 text-sm rounded-md cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-800 text-white"
               >
                 {currentForm === "login"
                   ? "Login"
@@ -122,19 +154,19 @@ export default function App() {
               <div className="mt-4 text-white">
                 {currentForm === "login" && (
                   <div className="flex flex-row items-center justify-center gap-4">
-                    <p className="text-sm text-center border-r border-cyan-600 pr-2">
+                    <p className="text-sm text-center text-slate-900 border-r border-cyan-600 pr-2">
                       Forgot Your Password? <br />
                       <span
-                        className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
+                        className="cursor-pointer underline text-blue-500 hover:text-blue-800 transition-colors"
                         onClick={() => setCurrentForm("recover")}
                       >
                         Recover
                       </span>
                     </p>
-                    <p className="text-sm text-center">
+                    <p className="text-sm text-center text-slate-900">
                       Don{"'"}t have an account? <br />
                       <span
-                        className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
+                        className="cursor-pointer underline text-blue-500 hover:text-blue-800 transition-colors"
                         onClick={() => setCurrentForm("signup")}
                       >
                         Sign up
@@ -143,10 +175,10 @@ export default function App() {
                   </div>
                 )}
                 {currentForm === "signup" && (
-                  <p className="text-sm text-center">
+                  <p className="text-sm text-center text-slate-900 pb-8">
                     Already have an account?{" "}
                     <span
-                      className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
+                      className="cursor-pointer underline text-blue-500 hover:text-blue-800 transition-colors"
                       onClick={() => setCurrentForm("login")}
                     >
                       Login
@@ -154,10 +186,10 @@ export default function App() {
                   </p>
                 )}
                 {currentForm === "recover" && (
-                  <p className="text-sm text-center">
+                  <p className="text-sm text-center text-slate-900">
                     Know Your Password?{" "}
                     <span
-                      className="cursor-pointer underline text-cyan-400 hover:text-cyan-300 transition-colors"
+                      className="cursor-pointer underline text-blue-500 hover:text-blue-800 transition-colors"
                       onClick={() => setCurrentForm("login")}
                     >
                       Login
@@ -169,6 +201,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      {/* <CustomerForm></CustomerForm> */}
     </div>
   );
 }
