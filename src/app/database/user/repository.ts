@@ -110,4 +110,30 @@ export class UserRepository {
       console.log(error);
     }
   }
+
+  static async getUser(email: string) {
+    try {
+      const user = await prisma.login.findUnique({
+        where: {
+          username: email,
+        },
+      });
+      if (!user) return { status: 404, message: "User not found" };
+      const rest = {
+        username: user.username,
+        role: user.role,
+        sessionId: user.sessionId,
+        sessionExpiry: user.sessionExpiry,
+        createdAt: user.createdAt,
+      };
+      return { status: 200, message: "User found", data: rest };
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(String(error));
+      }
+      return { status: 500, message: "Something went wrong" };
+    }
+  }
 }

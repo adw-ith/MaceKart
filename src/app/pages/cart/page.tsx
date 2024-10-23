@@ -30,7 +30,7 @@ const CartPage = () => {
         <h1 className="text-3xl font-semibold mb-4 text-yellow-700 retro-font">
           Your Cart is Empty
         </h1>
-        <Link href="/buyer/dashboard/pages">
+        <Link href="/pages/buyer/dashboard">
           <p className="text-orange-600 hover:underline hover:text-orange-800 retro-font">
             Continue Shopping
           </p>

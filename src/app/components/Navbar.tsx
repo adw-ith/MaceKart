@@ -1,5 +1,5 @@
 "use client";
-
+import { FaShoppingCart } from "react-icons/fa";
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -44,8 +44,16 @@ const Navbar: React.FC = () => {
               )}
             </div>
             {/* Other links */}
-            <Link href="/login" className=""><button className='border border-slate-100 px-4 py-1 hover:text-amber-950 hover:bg-slate-100 duration-300'>
-              Login</button></Link>
+            <Link href="/pages/cart" className="">
+              <button className=' flex items-center gap-2 border border-slate-100 px-4 py-1 hover:text-amber-950 hover:bg-slate-100 duration-300'>
+                <FaShoppingCart /> Cart
+              </button>
+            </Link>
+            <Link href="/login" className="">
+              <button className='border border-slate-100 px-4 py-1 hover:text-amber-950 hover:bg-slate-100 duration-300'>
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>

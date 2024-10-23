@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ProductCard from "@/app/components/ProductCard";
 import { Product } from "@prisma/client";
+import ProductCard from "@/app/components/ProductCard";
 
 export default function BuyerDashboardPage() {
   const [products, setProducts] = useState<Product[]>([]);
