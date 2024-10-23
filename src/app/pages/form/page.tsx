@@ -2,7 +2,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Form({ email }: { email: string }) {
+export default function Form() {
+
+  const email = ""
+
   const [role, setRole] = useState("");
   const [formName, setFormName] = useState("");
   const [formEmail, setFormEmail] = useState("");

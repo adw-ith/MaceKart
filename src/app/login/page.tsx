@@ -1,7 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function App() {
   const [currentForm, setCurrentForm] = useState<
@@ -11,6 +11,8 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const router=useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +28,6 @@ export default function App() {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-    setCurrentForm("signup"); // Reset to "signup" after submission if needed
   };
 
   const handleLogin = async () => {
@@ -43,6 +44,10 @@ export default function App() {
       );
 
       console.log("Login successful:", response.data);
+      if(response.data.data.status===200)
+      {
+        router.push('/pages/buyer/dashboard')
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -69,6 +74,10 @@ export default function App() {
       );
 
       console.log("Signup successful:", response.data);
+      if(response.data.data.status ===401) {
+        console.log("in here")
+        setCurrentForm("login")
+      }
     } catch (error) {
       console.error("Signup failed:", error);
     }

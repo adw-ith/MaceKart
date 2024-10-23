@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "@prisma/client";
 import ProductCard from "@/app/components/ProductCard";
+import Loader from "@/app/loader/page";
 
 export default function BuyerDashboardPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,7 +35,7 @@ export default function BuyerDashboardPage() {
   }, []);
 
   if (loading) {
-    return <p className="text-center">Loading...</p>;
+    return <Loader/>;
   }
 
   if (error) {
