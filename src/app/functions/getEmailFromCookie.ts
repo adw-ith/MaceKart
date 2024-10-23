@@ -15,8 +15,11 @@ export async function getEmailFromCookie()
         const { email } = sessionObject;
         return email
     }
-    catch(err)
-    {
-        throw new Error('tampered session');
-    }
+    catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error(String(error));
+        }
+      }
 }
