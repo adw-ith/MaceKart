@@ -1,6 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
+import { getEmailFromCookie } from '@/app/functions/getEmailFromCookie';
 // function base64Decode(encodedData:any) {
 //     return JSON.parse(Buffer.from(encodedData, 'base64').toString());
 // }
@@ -17,22 +18,21 @@ function decrypt(encryptedText:string) {
 }
 export async function GET() {
     // Retrieve the session cookie
-    const sessionCookie = cookies().get('session')?.value;
-
-    // If no session cookie is found, return a 401 (Unauthorized) response
-    if (!sessionCookie) {
+    try{
+        const email=await getEmailFromCookie()
+        return new Response(JSON.stringify({ email }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+  
+    catch(err)
+    {
         return new Response(JSON.stringify({ message: 'No session found' }), {
             status: 401,
             headers: { 'Content-Type': 'application/json' }
         });
     }
-
-    // Decode the base64-encoded session
-    const decodedSession = decrypt(sessionCookie);
-
     // Return the decoded session data
-    return new Response(JSON.stringify({ session: decodedSession }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-    });
+   
 }
