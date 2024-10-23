@@ -59,10 +59,12 @@ model Purchase {
   pid        Int      @id @default(autoincrement())
   cid        Int
   prod_id    Int
+  sid        Int
   date       DateTime @default(now())
   quantity   Int
   totalPrice Float
   approved   Boolean  @default(false)
+  completed  Boolean  @default(false)
   customer   Customer @relation(fields: [cid], references: [cid])
   product    Product  @relation(fields: [prod_id], references: [prod_id])
 }
