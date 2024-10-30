@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 export default function App() {
   const [currentForm, setCurrentForm] = useState<
     "login" | "signup" | "recover"
-  >("signup"); // Change to "signup"
+  >("signup");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const router=useRouter()
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,9 +44,8 @@ export default function App() {
       );
 
       console.log("Login successful:", response.data);
-      if(response.data.data.status===200)
-      {
-        router.push('/pages/buyer/dashboard')
+      if (response.data.data.status === 200) {
+        router.push("/pages/buyer/dashboard");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -74,9 +73,9 @@ export default function App() {
       );
 
       console.log("Signup successful:", response.data);
-      if(response.data.data.status ===401) {
-        console.log("in here")
-        setCurrentForm("login")
+      if (response.data.data.status === 401) {
+        console.log("in here");
+        setCurrentForm("login");
       }
     } catch (error) {
       console.error("Signup failed:", error);

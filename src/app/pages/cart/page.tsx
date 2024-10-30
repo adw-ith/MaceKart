@@ -102,9 +102,11 @@ const CartPage = () => {
             <h2 className="text-3xl font-semibold text-orange-800 retro-font">
               Total Amount: ${calculateTotal()}
             </h2>
-            <button className="mt-4 bg-orange-600 text-white py-2 px-6 rounded-lg hover:bg-orange-700 retro-font shadow-lg">
-              Proceed to Checkout
-            </button>
+            <Link href="/pages/checkout">
+              <button className="mt-4 bg-orange-600 text-white py-2 px-6 rounded-lg hover:bg-orange-700 retro-font shadow-lg">
+                Proceed to Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
