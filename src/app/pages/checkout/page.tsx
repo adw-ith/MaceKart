@@ -1,11 +1,12 @@
 "use client";
 import { useCart } from "@/app/context/ShoppingCartContext";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const CheckoutPage = () => {
   const { cartItems, clearCart } = useCart();
   const [totalPrice, setTotalPrice] = useState(0);
+  const [purchaseResults, setPurchaseResults] = useState<any>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const total = cartItems.reduce(
@@ -14,8 +15,6 @@ const CheckoutPage = () => {
     );
     setTotalPrice(total);
   }, [cartItems]);
-
-  const router = useRouter();
 
   const handlePurchase = async () => {
     try {
@@ -39,12 +38,19 @@ const CheckoutPage = () => {
             `Failed to purchase item with prod_id ${item.prod_id}`
           );
         }
+
+        const data = await response.json();
+        return { ...data, ...item };
       });
 
-      await Promise.all(purchasePromises);
+      const results = await Promise.all(purchasePromises);
+      setPurchaseResults(results);
+      setIsModalVisible(true);
+
+      // Hide modal after 15 seconds
+      setTimeout(() => setIsModalVisible(false), 15000);
 
       clearCart();
-      router.push("/pages/buyer/success");
     } catch (error) {
       console.error("Error purchasing items:", error);
     }
@@ -92,6 +98,45 @@ const CheckoutPage = () => {
           Purchase
         </button>
       </div>
+
+      {/* Purchase Modal */}
+      {isModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-lg mx-auto transform transition-transform duration-300 ease-in-out scale-105">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-blue-600">Purchase Successful</h2>
+              <button
+                onClick={() => setIsModalVisible(false)}
+                className="text-gray-500 hover:text-gray-700 focus:outline-none text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="space-y-4">
+              {purchaseResults.map((item: any) => (
+                <div
+                  key={item.prod_id}
+                  className="border-b border-gray-300 py-4 last:border-none"
+                >
+                  <h3 className="font-semibold text-lg text-gray-800">{item.name}</h3>
+                  <p className="text-gray-600">Quantity: {item.quantity}</p>
+                  <p className="text-gray-600">
+                    Price: <span className="font-medium text-gray-800">₹{item.price * item.quantity}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setIsModalVisible(false)}
+                className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none transition-all duration-200"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

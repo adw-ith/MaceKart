@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/context/AuthContext";
 import prisma from "../../../../lib/prisma_config";
 
 export class PurchaseRepository {
