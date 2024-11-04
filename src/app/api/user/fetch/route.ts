@@ -1,15 +1,18 @@
 import { UserRepository } from "@/app/database/user/repository";
-import { createCookie } from "@/app/functions/createCookie";
+import { getEmailFromCookie } from "@/app/functions/getEmailFromCookie";
 
 export async function POST(req: Request) {
+  // const { email } = await req.json();
+  const email = await getEmailFromCookie();
+  if (!email) {
+    throw new Error("cookie issue");
+  }
   try {
-    const { email, password, role } = await req.json();
-    await createCookie(email);
-    const data = await UserRepository.signUpUser(email, password, role);
+    const user = await UserRepository.getUser(email);
     return new Response(
       JSON.stringify({
         success: true,
-        data,
+        data: user,
       })
     );
   } catch (error) {
