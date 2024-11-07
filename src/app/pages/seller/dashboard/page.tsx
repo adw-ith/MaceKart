@@ -239,7 +239,10 @@ export default function SellerDashboardPage() {
   return (
     <div className="min-h-screen bg-slate-400">
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl text-white font-bold mb-6">Seller Dashboard</h1>
+        <div className=' flex w-full items-center justify-between'>
+          <h1 className="text-2xl text-white font-bold mb-6">Seller Dashboard</h1>
+          <button className=' flex items-center justify-center px-3 py-2 rounded-md text-white bg-blue-600'><a href="/pages/seller/upload">Add Product</a></button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
@@ -251,14 +254,14 @@ export default function SellerDashboardPage() {
               <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
               <p className="text-gray-700 mb-2">{product.description}</p>
               <p className="text-sm text-gray-600">Sold by: {product.seller.name}</p>
-              <div className="mt-4 space-x-2">
+              {/* <div className="mt-4 space-x-2">
                 <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                   View
                 </button>
                 <button className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
                   Reject
                 </button>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
           <Link href="/" className="text-xl font-bold">MaceKart</Link>
           <div className="flex space-x-4">
             {/* Products dropdown */}
-            <div className="relative flex">
+            {/* <div className="relative flex">
               <button 
                 className="hover:text-amber-100 focus:outline-none" 
                 onClick={toggleProductsDropdown}
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
                   <Link href="/products/handicrafts" className="block px-4 py-2 hover:bg-gray-100" onClick={handleProductSelect}>Handicrafts</Link>
                 </div>
               )}
-            </div>
+            </div> */}
             {/* Other links */}
             <Link href="/pages/cart" className="">
               <button className=' flex items-center gap-2 border border-slate-100 px-4 py-1 hover:text-amber-950 hover:bg-slate-100 duration-300'>

@@ -1,8 +1,9 @@
-// components/ProductForm.tsx
+"use client"
 import { useState } from 'react';
+import axios from 'axios';
 
 interface ProductFormProps {
-  onSubmit: (data: ProductData) => void;
+  onSubmit?: (data: ProductData) => void;
 }
 
 interface ProductData {
@@ -13,7 +14,20 @@ interface ProductData {
   categoryId: string;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
+const categories = [
+  { id: '1', name: 'Electronics' },
+  { id: '2', name: 'Fashion' },
+  { id: '3', name: 'Home and Kitchen' },
+  { id: '4', name: 'Beauty and Personal' },
+  { id: '5', name: 'Sports and Outdoors' },
+  { id: '6', name: 'Toys and Games' },
+  { id: '7', name: 'Automotive' },
+  { id: '8', name: 'Books and Stationary' },
+  { id: '9', name: 'Health and Wellness' },
+  { id: '10', name: 'Grocery and Gourmet Foods' },
+];
+
+const ProductForm: React.FC<ProductFormProps> = () => {
   const [formData, setFormData] = useState<ProductData>({
     name: '',
     price: 0,
@@ -30,7 +44,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
     categoryId: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -44,17 +58,22 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
       price: formData.price > 0 ? '' : 'Price must be greater than zero',
       quantity: formData.quantity >= 0 ? '' : 'Quantity cannot be negative',
       description: formData.description ? '' : 'Description is required',
-      categoryId: formData.categoryId ? '' : 'Category ID is required',
+      categoryId: formData.categoryId ? '' : 'Category is required',
     };
     setErrors(newErrors);
     return Object.values(newErrors).every((error) => !error);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      onSubmit(formData);
-      setFormData({ name: '', price: 0, quantity: 0, description: '', categoryId: '' });
+      try {
+        const response = await axios.post("/api/product/add", formData);
+        console.log("Product added:", response.data);
+        setFormData({ name: '', price: 0, quantity: 0, description: '', categoryId: '' });
+      } catch (error) {
+        console.error("Error adding product:", error);
+      }
     }
   };
 
@@ -62,7 +81,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
     <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">Add New Product</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/** Name Field */}
+        {/* Name Field */}
         <div>
           <label className="block text-gray-700">Name</label>
           <input
@@ -77,7 +96,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
           {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
 
-        {/** Price Field */}
+        {/* Price Field */}
         <div>
           <label className="block text-gray-700">Price</label>
           <input
@@ -92,7 +111,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
           {errors.price && <p className="text-red-500 text-sm">{errors.price}</p>}
         </div>
 
-        {/** Quantity Field */}
+        {/* Quantity Field */}
         <div>
           <label className="block text-gray-700">Quantity</label>
           <input
@@ -107,7 +126,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
           {errors.quantity && <p className="text-red-500 text-sm">{errors.quantity}</p>}
         </div>
 
-        {/** Description Field */}
+        {/* Description Field */}
         <div>
           <label className="block text-gray-700">Description</label>
           <textarea
@@ -121,22 +140,28 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit }) => {
           {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
         </div>
 
-        {/** Category ID Field */}
+        {/* Category ID Dropdown */}
         <div>
-          <label className="block text-gray-700">Category ID</label>
-          <input
-            type="text"
+          <label className="block text-gray-700">Category</label>
+          <select
             name="categoryId"
             value={formData.categoryId}
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
               errors.categoryId ? 'border-red-500' : 'border-gray-300'
             }`}
-          />
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
           {errors.categoryId && <p className="text-red-500 text-sm">{errors.categoryId}</p>}
         </div>
 
-        {/** Submit Button */}
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"

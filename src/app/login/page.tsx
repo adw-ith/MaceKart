@@ -51,14 +51,14 @@ export default function App() {
       console.error("Login failed:", error);
     }
   };
-
+  
   const handleSignUp = async () => {
     // Basic validation to ensure passwords match
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-
+    
     try {
       const response = await axios.post(
         "/api/user/signup",
@@ -71,8 +71,9 @@ export default function App() {
           withCredentials: true,
         }
       );
-
+      
       console.log("Signup successful:", response.data);
+      router.push("/pages/buyer/dashboard");
       if (response.data.data.status === 401) {
         console.log("in here");
         setCurrentForm("login");
